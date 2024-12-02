@@ -79,13 +79,13 @@ public class ControlEnemies : MonoBehaviour
                 Vector2 direccionEmpuje = (collision.transform.position - transform.position).normalized;
 
                 // Aplicar la fuerza de empuje al jugador usando AddForce en lugar de modificar directamente la velocidad
-                float fuerzaEmpuje = 2f; // Ajusta esta fuerza según lo que desees
+                float fuerzaEmpuje = 1f; // Ajusta esta fuerza según lo que desees
                 jugadorRB.AddForce(direccionEmpuje * fuerzaEmpuje, ForceMode2D.Impulse); // Aplicamos un impulso al jugador
             }
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

@@ -42,6 +42,8 @@ public class Proyectil : MonoBehaviour
             AudioSource.PlayClipAtPoint(sonidoKill, transform.position);
             // Destruir el proyectil y el enemigo colisionado
             Destroy(gameObject);
+            //cambiar color del enemigo a rojo
+            other.GetComponent<SpriteRenderer>().color = Color.red;
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("Pared"))

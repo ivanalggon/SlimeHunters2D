@@ -33,6 +33,8 @@ public class ControlPlayer : MonoBehaviour
         vidaHUD[0].SetActive(false);
 
         animacion = GetComponent<Animator>();
+
+        Time.timeScale = 1;
     }
     void Update()
     {
@@ -60,8 +62,6 @@ public class ControlPlayer : MonoBehaviour
 
         // Calcular la dirección desde el punto de disparo hacia el ratón
         Vector2 direccionDisparo = (posicionRaton - posicionPuntoDisparo).normalized;
-
-        Debug.Log("Posición del ratón: " + posicionRaton + ", Dirección: " + direccionDisparo);
 
         // Crear el proyectil en el punto de disparo
         GameObject proyectil = Instantiate(proyectilPrefab, puntoDisparo.position, Quaternion.identity);
@@ -152,19 +152,24 @@ public class ControlPlayer : MonoBehaviour
     {
         
         invulnerable = true; // El jugador es invulnerable
-        
-        // Esperar 2 segundos
-        yield return new WaitForSeconds(2);
+        // cambiar el color del jugador al recibir daño
+        GetComponent<SpriteRenderer>().color = Color.red;
 
+        // Esperar 2 segundos
+        yield return new WaitForSeconds(1);
+        GetComponent<SpriteRenderer>().color = Color.white;
         invulnerable = false; // El jugador ya no es invulnerable
 
     }
 
     IEnumerator EsperarGameOver()
     {
-        yield return new WaitForSeconds(2); // Espera 2 segundos
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(2); // Espera 2 segundos
         // Después de esperar, carga la escena de Game Over
+        
         SceneManager.LoadScene("GameOver");
+        Time.timeScale = 1;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

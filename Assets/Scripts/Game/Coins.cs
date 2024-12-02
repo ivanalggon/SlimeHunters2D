@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    public int valor = 1; // Valor de la moneda
+    private int valor = 1; // Valor de la moneda
     public AudioClip sonido; // Sonido al recoger la moneda
 
     // Texto que se actualiza en la interfaz de usuario (UI)
@@ -39,13 +39,11 @@ public class Coins : MonoBehaviour
 
             // Actualizar el texto en la interfaz de usuario
             textoPuntaje.text = puntaje.ToString();
-
             // Reproducir sonido
             AudioSource.PlayClipAtPoint(sonido, transform.position);
 
             // Activar la animación de la moneda al ser recogida
             animacion.SetTrigger("Collected");
-
             // Marcar que la moneda ya ha sido recogida
             monedaRecogida = true;
 
