@@ -7,13 +7,13 @@ public class ControlEnemies : MonoBehaviour
     public float velocidad = 1f; // Velocidad del enemigo
     public float rangoDeteccion = 5f; // Rango dentro del cual el enemigo persigue al jugador
 
-    private Rigidbody2D rigidbody2D; // Referencia al Rigidbody2D del enemigo
+    private Rigidbody2D enemyRigidBody; // Referencia al Rigidbody2D del enemigo
     private Animator animacion; // Referencia al Animator del enemigo
     private Transform jugador; // Referencia al transform del jugador
 
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        enemyRigidBody = GetComponent<Rigidbody2D>();
         animacion = GetComponent<Animator>();
 
         // Encuentra al jugador una vez al iniciar
@@ -41,7 +41,7 @@ public class ControlEnemies : MonoBehaviour
         else
         {
             // Detener movimiento y animación si está fuera del rango
-            rigidbody2D.velocity = Vector2.zero;
+            enemyRigidBody.velocity = Vector2.zero;
             animacion.SetBool("isWalking", false);
             animacion.SetBool("isIdle", true);
         }
@@ -53,7 +53,7 @@ public class ControlEnemies : MonoBehaviour
         Vector2 direccion = (jugador.position - transform.position).normalized;
 
         // Establecer la velocidad del Rigidbody2D
-        rigidbody2D.velocity = direccion * velocidad;
+        enemyRigidBody.velocity = direccion * velocidad;
 
         // Manejar animaciones
         animacion.SetBool("isWalking", true);

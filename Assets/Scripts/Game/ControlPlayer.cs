@@ -85,44 +85,42 @@ public class ControlPlayer : MonoBehaviour
 
     private void MovimientoPlayer()
     {
+        // Obtén el movimiento del jugador
         float movimientoHorizontal = Input.GetAxis("Horizontal");
         float movimientoVertical = Input.GetAxis("Vertical");
 
+        // Calcula el movimiento
         Vector2 movimiento = new Vector2(movimientoHorizontal, movimientoVertical) * velocidad * Time.deltaTime;
         transform.Translate(movimiento);
 
+        // Determina el estado del jugador basado en la dirección
         if (movimientoHorizontal < 0)
         {
-            animacion.SetBool("isMovingLeft", true);
-            animacion.SetBool("isMovingRight", false);
-            animacion.SetBool("isMoving", false);
-            animacion.SetBool("isIdle", false);
+            SetAnimationState(isMovingLeft: true);
         }
-        // si el movimiento es solamente derecha (tecla D)
         else if (movimientoHorizontal > 0)
         {
-            animacion.SetBool("isMovingRight", true);
-            animacion.SetBool("isMovingLeft", false);
-            animacion.SetBool("isMoving", false);
-            animacion.SetBool("isIdle", false);
+            SetAnimationState(isMovingRight: true);
         }
-        // Arriba o abajo (tecla W o S)
-        else if (movimientoVertical > 0 || movimientoVertical < 0)
+        else if (movimientoVertical != 0)
         {
-            animacion.SetBool("isMoving", true);
-            animacion.SetBool("isMovingLeft", false);
-            animacion.SetBool("isMovingRight", false);
-            animacion.SetBool("isIdle", false);
+            SetAnimationState(isMoving: true);
         }
-        // si no se esta moviendo (Idle)
         else
         {
-            animacion.SetBool("isIdle", true);
-            animacion.SetBool("isMoving", false);
-            animacion.SetBool("isMovingLeft", false);
-            animacion.SetBool("isMovingRight", false);
+            SetAnimationState(isIdle: true);
         }
     }
+
+    // Función auxiliar para manejar el estado de animación
+    private void SetAnimationState(bool isIdle = false, bool isMoving = false, bool isMovingLeft = false, bool isMovingRight = false)
+    {
+        animacion.SetBool("isIdle", isIdle);
+        animacion.SetBool("isMoving", isMoving);
+        animacion.SetBool("isMovingLeft", isMovingLeft);
+        animacion.SetBool("isMovingRight", isMovingRight);
+    }
+
 
     private void RecibirDaño()
     {

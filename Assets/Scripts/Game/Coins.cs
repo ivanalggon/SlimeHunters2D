@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Coins : MonoBehaviour
 {
@@ -17,10 +18,11 @@ public class Coins : MonoBehaviour
 
     void Start()
     {
-        // Encontrar el objeto con la etiqueta "CoinsText" y obtener el componente TextMeshProUGUI
-        textoPuntaje = GameObject.FindWithTag("CoinsText").GetComponent<TMPro.TextMeshProUGUI>();
+        // Reiniciar el puntaje al cargar una nueva escena
+        puntaje = 0;
 
-        // Asegúrate de inicializar a 0 el puntaje global al iniciar el juego
+        // Actualizar el texto del puntaje en la UI
+        textoPuntaje = GameObject.FindWithTag("CoinsText").GetComponent<TMPro.TextMeshProUGUI>();
         textoPuntaje.text = puntaje.ToString();
 
         animacion = GetComponent<Animator>();
