@@ -49,28 +49,36 @@ public class ControlPlayer : MonoBehaviour
 
     void Disparar()
     {
-        // Reproducir el sonido del disparo
-        AudioSource.PlayClipAtPoint(sonidoDisparo, transform.position);
-
-        // Obtener la posición del ratón en el mundo 2D
-        Vector3 posicionRaton = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        posicionRaton.z = 0; // Asegurarte de que el ratón esté en el plano 2D
-
-        // Asegurarte de que el punto de disparo también esté en 2D
-        Vector3 posicionPuntoDisparo = puntoDisparo.position;
-        posicionPuntoDisparo.z = 0;
-
-        // Calcular la dirección desde el punto de disparo hacia el ratón
-        Vector2 direccionDisparo = (posicionRaton - posicionPuntoDisparo).normalized;
-
-        // Crear el proyectil en el punto de disparo
-        GameObject proyectil = Instantiate(proyectilPrefab, puntoDisparo.position, Quaternion.identity);
-
-        // Configurar la dirección del proyectil
-        Proyectil scriptProyectil = proyectil.GetComponent<Proyectil>();
-        if (scriptProyectil != null)
+        // si el juego esta pausado no se puede disparar
+        if (Time.timeScale == 0)
         {
-            scriptProyectil.ConfigurarDireccion(direccionDisparo);
+            return;
+        }
+        else
+        {
+            // Reproducir el sonido del disparo
+            AudioSource.PlayClipAtPoint(sonidoDisparo, transform.position);
+
+            // Obtener la posición del ratón en el mundo 2D
+            Vector3 posicionRaton = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            posicionRaton.z = 0; // Asegurarte de que el ratón esté en el plano 2D
+
+            // Asegurarte de que el punto de disparo también esté en 2D
+            Vector3 posicionPuntoDisparo = puntoDisparo.position;
+            posicionPuntoDisparo.z = 0;
+
+            // Calcular la dirección desde el punto de disparo hacia el ratón
+            Vector2 direccionDisparo = (posicionRaton - posicionPuntoDisparo).normalized;
+
+            // Crear el proyectil en el punto de disparo
+            GameObject proyectil = Instantiate(proyectilPrefab, puntoDisparo.position, Quaternion.identity);
+
+            // Configurar la dirección del proyectil
+            Proyectil scriptProyectil = proyectil.GetComponent<Proyectil>();
+            if (scriptProyectil != null)
+            {
+                scriptProyectil.ConfigurarDireccion(direccionDisparo);
+            }
         }
     }
 
