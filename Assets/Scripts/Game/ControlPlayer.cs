@@ -124,7 +124,7 @@ public class ControlPlayer : MonoBehaviour
 
     private void RecibirDaño()
     {
-        if (invulnerable == false)
+        if (!invulnerable)
         {
             vida -= 1;
         }
@@ -135,7 +135,7 @@ public class ControlPlayer : MonoBehaviour
             vidaHUD[i].SetActive(i == vida);
         }
 
-        if (vida > 0 && invulnerable == false)
+        if (vida > 0 && !invulnerable)
         {
             // Reproducir sonido de daño
             AudioSource.PlayClipAtPoint(sonidoDaño, transform.position);
