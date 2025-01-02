@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6884550729464181271}
   m_Layer: 0
   m_Name: Monedas
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6859fcb63ec314b4d9e06d98035a622d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valor: 1
   sonido: {fileID: 8300000, guid: df970eb6d8eeec546b4199c685a95110, type: 3}
 --- !u!50 &250901889103644501
 Rigidbody2D:

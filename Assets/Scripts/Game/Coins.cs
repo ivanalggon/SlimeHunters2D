@@ -52,6 +52,27 @@ public class Coins : MonoBehaviour
             // Llamar a la coroutine para destruir la moneda después de la animación
             StartCoroutine(DestruirMonedaDespuesDeAnimacion());
         }
+
+        // Recoger todas las monedas disponibles en una variable
+        GameObject[] monedas = GameObject.FindGameObjectsWithTag("Coin");
+
+        // Si no quedan monedas en la escena
+        if (monedas.Length == 1)
+        {
+            // Cargar la escena de victoria despues de 1 segundo
+            StartCoroutine(CargarEscenaDespuesDeTiempo(1f, "Win"));
+
+        }
+    }
+
+    // Coroutine que carga una escena después de un tiempo determinado
+    IEnumerator CargarEscenaDespuesDeTiempo(float tiempo, string escena)
+    {
+        // Esperar el tiempo indicado
+        yield return new WaitForSeconds(tiempo);
+
+        // Cargar la escena indicada
+        SceneManager.LoadScene(escena);
     }
 
     // Coroutine que espera que termine la animación antes de destruir la moneda
