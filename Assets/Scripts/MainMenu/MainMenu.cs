@@ -1,24 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     public void StartPlaying()
     {
         // Load the game scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game");
     }
     public void ShowCredits()
     {
         // Load the credits scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Credits");
+        SceneManager.LoadScene("Credits");
     }
     public void ReturnMainMenu()
     {
         // Load the main menu scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("PrincipalMenu");
+        SceneManager.LoadScene("PrincipalMenu");
     }
     public void ExitGame()
     {
